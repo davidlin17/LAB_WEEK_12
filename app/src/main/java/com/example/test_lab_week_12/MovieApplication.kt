@@ -12,16 +12,12 @@ class MovieApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // Retrofit setup
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
-        // Create MovieService
-        val movieService = retrofit.create(MovieService::class.java)
-
-        // Create repository
-        movieRepository = MovieRepository(movieService)
+        val service = retrofit.create(MovieService::class.java)
+        movieRepository = MovieRepository(service)
     }
 }
